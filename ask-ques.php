@@ -11,9 +11,15 @@
                 <?php require_once 'components/left-sitebar.php';?>
                </div>
                <div class="col-sm-7 col-md-7">
+                <?php
+                if (isset($_GET['error'])): ?>
+                    <div class="alert alert-danger">
+                        <?=  base64_decode($_GET['error']); ?>
+                    </div>
+                <?php endif ?>
                     <form action="app/ask.php" method="post" class="mb-3">
                     	Select a subject or category:
-                    	<select name="sub-id" class="form-control">
+                    	<select name="sub-id" class="form-control mb-3">
                     		<?php
 							 $result = mysqli_query($conn,"SELECT * FROM `subjects`");
 							 if (mysqli_num_rows($result)>0)
@@ -27,9 +33,9 @@
 							?>
                     	</select>
                     	Your Question:
-                    	<textarea name="ques" class="form-control mb-3" cols="30" rows="5"></textarea>
+                    	<textarea name="ques" class="form-control mb-3 p-3" cols="30" rows="5"></textarea>
                     	Offer points for answer:
-                    	<select name="point">
+                    	<select name="points" class="p-2">
                     		<option value="1">1 point</option>
                     		<option value="2">2 points</option>
                     		<option value="3">3 points</option>
@@ -41,7 +47,7 @@
                     		<option value="9">9 points</option>
                     		<option value="10">10 points</option>
                     	</select>
-                    	<button type="submit" name="ask" class="btn btn-danger pull-right">Ask</button>
+                    	<button type="submit" name="ask" class="btn btn-danger btn-lg pull-right">Ask</button>
                     </form>
                 </div>
                 <div class="col-sm-3 col-md-3">
